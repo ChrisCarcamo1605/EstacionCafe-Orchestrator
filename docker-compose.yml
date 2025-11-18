@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   # Base de Datos PostgreSQL
   db:
@@ -42,12 +40,12 @@ services:
         condition: service_healthy
     networks:
       - estacion-cafe-network
-    command: sh -c "npm start & sleep 15 && npm run migration:run && npm run seed:run && wait"
+    command: sh -c "node ./src/compiled/main.js & sleep 10 && npm run migration:run && npm run seed:run && wait"
 
   # Machine Learning Dashboard
   ml-dashboard:
     build:
-      context: ./EstacionCafe-ML
+      context: ./machinelearningcafeteria
       dockerfile: Dockerfile
     container_name: estacion-cafe-ml
     restart: unless-stopped
@@ -101,9 +99,16 @@ services:
       NODE_ENV: production
       HOST: 0.0.0.0
       PORT: 4321
+      SERVER_BACKEND_API_URL: http://backend:3484/api
+      SERVER_ML_API_URL: http://ml-dashboard:8000/api
+      SERVER_EMAIL_SERVICE_URL: http://email-server:3004/api/send-report
+      PUBLIC_BACKEND_API_URL: http://localhost:3484/api
+      PUBLIC_ML_API_URL: http://localhost:8000/api
+      PUBLIC_EMAIL_SERVICE_URL: http://localhost:3004/api/send-report
     depends_on:
       - backend
       - email-server
+      - ml-dashboard
     networks:
       - estacion-cafe-network
 

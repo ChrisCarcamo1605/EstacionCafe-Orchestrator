@@ -1,0 +1,16 @@
+# Ignorar los repositorios clonados (se referencian por path en docker-compose)
+EstacionCafeFrontend/
+EstacionCafe-Backend/
+EstacionCafe-ML/
+
+# Git
+.git/
+.gitignore
+
+# Documentación
+README.md
+*.md
+
+# Scripts
+setup.ps1
+setup.sh

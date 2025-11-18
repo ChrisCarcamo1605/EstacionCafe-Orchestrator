@@ -23,7 +23,7 @@ cd EstacionCafe-Orchestrator
 # Clonar los servicios
 git clone https://github.com/ChrisCarcamo1605/EstacionCafeFrontend
 git clone <url-backend> EstacionCafe-Backend
-git clone <url-ml> EstacionCafe-ML
+git clone <url-ml> machinelearningcafeteria
 ```
 
 ### 2. Levantar todos los servicios
