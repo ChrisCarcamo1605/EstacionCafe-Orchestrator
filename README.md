@@ -22,14 +22,14 @@ cd EstacionCafe-Orchestrator
 
 # Clonar los servicios
 git clone https://github.com/ChrisCarcamo1605/EstacionCafeFrontend
-git clone <url-backend> EstacionCafe-Backend
-git clone <url-ml> machinelearningcafeteria
+git clone https://github.com/ChrisCarcamo1605/EstacionCafe-Backend.git EstacionCafe-Backend
+git clone https://github.com/Chrislight879/machinelearningcafeteria.git EstacionCafe-ML
 ```
 
 ### 2. Levantar todos los servicios
 
 ```bash
-docker-compose up -d
+docker-compose up --build -d
 ```
 
 ### 3. Verificar que todo está corriendo
