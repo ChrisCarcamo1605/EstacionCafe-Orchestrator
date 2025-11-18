@@ -1,0 +1,29 @@
+# Ignorar carpetas de dependencias
+**/node_modules/
+**/dist/
+**/.astro/
+**/__pycache__/
+**/.pytest_cache/
+**/.venv/
+**/venv/
+
+# Ignorar archivos de entorno (se manejan en cada repo)
+**/.env
+**/.env.local
+**/.env.production
+
+# Ignorar archivos de IDE
+**/.idea/
+**/.vscode/
+**/.DS_Store
+
+# Ignorar archivos de log
+**/*.log
+**/npm-debug.log*
+
+# Ignorar archivos de build
+**/coverage/
+**/.nyc_output/
+
+# Datos de base de datos
+postgres_data/
