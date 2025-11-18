@@ -1,3 +1,8 @@
+# Repositorios de los proyectos (cada uno tiene su propio repo)
+EstacionCafe-Backend/
+EstacionCafeFrontend/
+machinelearningcafeteria/
+
 # Ignorar carpetas de dependencias
 **/node_modules/
 **/dist/
