@@ -1,0 +1,36 @@
+{
+  "name": "estacioncafe-orchestrator",
+  "version": "1.0.0",
+  "description": "Orquestador Docker para todos los servicios de Estación Café",
+  "scripts": {
+    "setup": "node scripts/setup.js",
+    "setup:force": "node scripts/setup.js --force",
+    "setup:skip-deps": "node scripts/setup.js --skip-deps",
+    "dev:all": "docker-compose up",
+    "dev:build": "docker-compose up --build",
+    "start": "docker-compose up -d",
+    "start:build": "docker-compose up -d --build",
+    "stop": "docker-compose down",
+    "stop:clean": "docker-compose down -v",
+    "logs": "docker-compose logs -f",
+    "logs:frontend": "docker-compose logs -f frontend",
+    "logs:backend": "docker-compose logs -f backend",
+    "logs:ml": "docker-compose logs -f ml-dashboard",
+    "logs:email": "docker-compose logs -f email-service",
+    "status": "docker-compose ps",
+    "restart": "docker-compose restart",
+    "clean": "docker-compose down -v && docker system prune -f"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ChrisCarcamo1605/EstacionCafe-Orchestrator.git"
+  },
+  "keywords": [
+    "estacion-cafe",
+    "docker",
+    "microservices",
+    "orchestrator"
+  ],
+  "author": "ChrisCarcamo1605",
+  "license": "MIT"
+}

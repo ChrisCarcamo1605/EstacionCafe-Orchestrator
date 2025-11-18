@@ -13,29 +13,49 @@ Este proyecto orquesta los siguientes repositorios:
 
 ## 🚀 Inicio Rápido
 
-### 1. Clonar todos los repositorios
+### Instalación Automática (Recomendado) ⚡
 
 ```bash
-# Clonar este orquestador
+# 1. Clonar este orquestador
 git clone <url-de-este-repo>
 cd EstacionCafe-Orchestrator
 
-# Clonar los servicios
-git clone https://github.com/ChrisCarcamo1605/EstacionCafeFrontend
-git clone https://github.com/ChrisCarcamo1605/EstacionCafe-Backend.git EstacionCafe-Backend
-git clone https://github.com/Chrislight879/machinelearningcafeteria.git EstacionCafe-ML
+# 2. Instalar dependencias del orquestador
+npm install
+
+# 3. Ejecutar setup (clona repos + instala dependencias)
+npm run setup
 ```
 
-### 2. Levantar todos los servicios
-
+**Opciones disponibles:**
 ```bash
-docker-compose up --build -d
+npm run setup              # Configuración completa
+npm run setup:force        # Reclonar todo desde cero
+npm run setup:skip-deps    # Solo clonar, sin instalar dependencias
 ```
 
-### 3. Verificar que todo está corriendo
+**El setup automáticamente:**
+- ✅ Verifica requisitos (Git, Docker, Node.js, Python)
+- ✅ Clona los 3 repositorios necesarios
+- ✅ Instala dependencias de Frontend (npm install)
+- ✅ Instala dependencias de Backend (npm install)
+- ✅ Instala dependencias de Email Service (npm install)
+- ✅ Instala dependencias de ML Dashboard (pip install)
+
+### Levantar los Servicios 🐳
 
 ```bash
-docker-compose ps
+# Desarrollo (con logs en consola)
+npm run dev:all
+
+# Desarrollo con rebuild
+npm run dev:build
+
+# Producción (en background)
+npm start
+
+# Producción con rebuild
+npm run start:build
 ```
 
 ## 🌐 URLs de Servicios
@@ -48,63 +68,94 @@ Una vez levantados, accede a:
 - **Email Service**: http://localhost:3004
 - **PostgreSQL**: localhost:5555
 
-## 📂 Estructura de Carpetas Esperada
+## 📂 Estructura de Carpetas
+
+Después de ejecutar `setup.ps1`, tendrás esta estructura:
 
 ```
 EstacionCafe-Orchestrator/
 ├── EstacionCafeFrontend/        # Repo del frontend
+│   ├── src/
+│   ├── public/
+│   ├── server/                  # Email service
+│   └── package.json
 ├── EstacionCafe-Backend/        # Repo del backend
-├── EstacionCafe-ML/             # Repo del ML
+│   ├── application/
+│   ├── controller/
+│   ├── core/
+│   ├── infrastructure/
+│   └── package.json
+├── machinelearningcafeteria/    # Repo del ML Dashboard
+│   ├── app/
+│   ├── main.py
+│   └── requirements.txt
 ├── docker-compose.yml           # Orquestador maestro
+├── setup.ps1                    # Script de inicialización
 └── README.md                    # Este archivo
 ```
 
 ## 🛠️ Comandos Útiles
 
+### Gestión de Servicios
 ```bash
-# Levantar todos los servicios
-docker-compose up -d
+npm start                  # Iniciar todos los servicios
+npm run start:build        # Iniciar con rebuild
+npm stop                   # Detener servicios
+npm restart                # Reiniciar servicios
+npm run status             # Ver estado de servicios
+```
 
-# Ver logs de todos los servicios
-docker-compose logs -f
+### Logs y Debug
+```bash
+npm run logs               # Ver logs de todos
+npm run logs:frontend      # Logs del frontend
+npm run logs:backend       # Logs del backend
+npm run logs:ml            # Logs del ML Dashboard
+npm run logs:email         # Logs del email service
+```
 
-# Ver logs de un servicio específico
-docker-compose logs -f frontend
-docker-compose logs -f backend
-docker-compose logs -f ml-dashboard
+### Desarrollo
+```bash
+npm run dev:all            # Modo desarrollo (con logs)
+npm run dev:build          # Modo desarrollo con rebuild
+```
 
-# Detener todos los servicios
-docker-compose down
+### Limpieza
+```bash
+npm run stop:clean         # Detener y limpiar volúmenes
+npm run clean              # Limpieza completa de Docker
+```
 
-# Reconstruir y levantar
-docker-compose up -d --build
-
-# Ver estado de servicios
-docker-compose ps
+### Comandos Docker Directos (alternativa)
+```bash
+docker-compose up -d       # Iniciar
+docker-compose down        # Detener
+docker-compose logs -f     # Ver logs
+docker-compose ps          # Ver estado
 ```
 
 ## 🔧 Desarrollo Individual
 
-Cada servicio puede desarrollarse independientemente:
+Cada servicio puede desarrollarse independientemente sin Docker:
 
 ### Frontend
 ```bash
 cd EstacionCafeFrontend
-npm install
+npm install          # Solo si no corriste npm run setup
 npm run dev
 ```
 
 ### Backend
 ```bash
 cd EstacionCafe-Backend
-npm install
+npm install          # Solo si no corriste npm run setup
 npm start
 ```
 
 ### ML Dashboard
 ```bash
-cd EstacionCafe-ML
-pip install -r requirements.txt
+cd machinelearningcafeteria
+pip install -r requirements.txt  # Solo si no corriste npm run setup
 python main.py
 ```
 
@@ -127,11 +178,17 @@ docker-compose down -v
 docker-compose up -d --build
 ```
 
-## 📋 Requisitos
+## 📋 Requisitos Previos
 
-- Docker Desktop instalado
-- Git instalado
-- Acceso a los repositorios privados (si aplica)
+Antes de ejecutar el script de inicialización, asegúrate de tener instalado:
+
+- ✅ **Git** (obligatorio) - [Descargar](https://git-scm.com/)
+- ✅ **Docker Desktop** (para contenedores) - [Descargar](https://www.docker.com/products/docker-desktop)
+- ✅ **Node.js** v18+ (para desarrollo local) - [Descargar](https://nodejs.org/)
+- ✅ **Python** 3.8+ (para ML Dashboard) - [Descargar](https://www.python.org/)
+- 🔐 Acceso a los repositorios (si son privados)
+
+El script `setup.ps1` verificará automáticamente estos requisitos al ejecutarse.
 
 ## 🔐 Configuración de Variables de Entorno
 
